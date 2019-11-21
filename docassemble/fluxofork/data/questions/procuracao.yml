@@ -1,0 +1,64 @@
+metadata:
+  title: Procuração Modificada
+  short title: Procuração
+  description: |
+    Modelo de procuração para teste
+    de plataforma de Document Assembly
+  required privileges:
+    - admin
+    - developer
+    - advocate
+  authors:    
+    - name: Ismênia Helena Furtado de Magalhães Gomes
+      organization: SiLEX Sistemas Ltda.    
+    - name: Roberto Vasconcelos Novaes
+      organization: SiLEX Sistemas Ltda.
+  revision_date: 2019-08-29
+---
+sections:
+  - Introdução
+  - Outorgante
+  - Diretores
+---
+features:
+  navigation: True
+  progress bar: True
+---
+objects:
+  - outorgante: Person
+  - diretor: Person
+  - diretores: DAList
+---
+question: Procuração
+subquestion: |
+  Este formulário permite a geração de uma procuração.
+buttons:
+  - Continuar: continue
+mandatory: True
+progress: 1
+---
+question: Dados do Outorgante
+fields:
+  - Nome do Outorgante: outorgante.name  
+  - Logradouro: outorgante.address.street
+  - Número: outorgante.address.street_number
+  - Complemento: outorgante.address.unit
+  - Cidade: outorgante.address.city
+  - UF: outorgante.address.state
+  - CEP: outorgante.address.zip  
+mandatory: True
+section: Outorgante
+progress: 1
+---
+question: Dados do Diretor
+fields:
+  - Nome do Diretor: diretor.name  
+  - Logradouro: diretor.address.street
+  - Número: diretor.address.street_number
+  - Complemento: diretor.address.unit
+  - Cidade: diretor.address.city
+  - UF: diretor.address.state
+  - CEP: diretor.address.zip  
+mandatory: True
+section: Diretores
+progress: 50
