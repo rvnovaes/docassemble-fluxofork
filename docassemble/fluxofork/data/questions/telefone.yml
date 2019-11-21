@@ -1,0 +1,11 @@
+question: |
+  Digite seu telefone:
+fields:
+  - Telefone: telefone
+---
+question: Seu telefone é ${ telefone }
+attachment:
+  name: Simples telefone
+  filename: wizard
+  docx template file: wizard_template.docx
+mandatory: True
