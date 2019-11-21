@@ -1,0 +1,277 @@
+metadata:
+  title: Procuração
+  subtitle: Bem vindo ao formulário de Procuração! Este modelo de procuração é amplo e atende a diversos objetivos. Para agilizar sua entrevista e focar em seus objetivos, responda às perguntas abaixo.
+---
+features:
+  navigation: True
+  progress bar: True
+  javascript: 
+  - jquery-3.4.1.min.js
+  - jquery.mask.min.js
+---
+sections:
+    - Outorgantes
+    - Outorgados
+    - Poderes e validade
+    - Data e assinatura
+---
+objects:
+  - outorgantes: DAList.using(ask_number=True, object_type=Person)
+  # - representante: DAList.using(ask_number=True, object_type=DAObject, complete_attribute='complete')  
+  # - pjout: DAList.using(object_type=DAObject, complete_attribute='complete')
+  # - outorgado: DAList.using(object_type=DAObject, complete_attribute='complete')
+---
+mandatory: true
+question: |
+  Outorgantes da proucuração
+subquestion: |
+  % for outorgante in outorgantes:    
+     * ${ outorgante }              
+  % endfor
+---
+question: |
+  Quantos outorgantes terá a sua procuração?
+fields:
+  - Nº de outorgantes: outorgantes.target_number
+    datatype: integer
+    min: 1
+    hint: numero de pessoas que concedem poderes.
+# ---
+# code: |
+#   outorgantes[i].tipo_pessoa
+#   outorgantes[i].complete = True
+# ---
+# code: |
+#   representante[i].complete = True
+# ---
+# code: |
+#   pfout.name
+#   pfout.sexo
+#   pfout.tipologradouro
+#   pfout.logradouro
+#   pfout.numero
+#   pfout.complemento
+#   pfout.bairro
+#   pfout.municipio
+#   pfout.estado
+#   pfout.nacionalidade
+#   pfout.estadocivil
+#   pfout.profissao
+#   pfout.cpf
+#   pfout.documento
+#   pfout.orgaoemissor
+# ---
+# question: |
+#   Qual o tipo de pessoa do ${ ordinal(i) } outorgante?
+# subquestion: |
+#   Informe o tipo de pessoa para cada outorgante.
+# fields:
+#   - Tipo de pessoa: outorgantes[i].tipo_pessoa
+#     datatype: radio
+#     choices: 
+#       - Pessoa Jurídica
+#       - Pessoa Física 
+#     hint: numero de pessoas que concedem poderes.
+#   - N. de representantes: representante.target_number
+#     datatype: integer
+#     show if: 
+#       variable: outorgantes[i].tipo_pessoa
+#       is: Pessoa Jurídica
+#     hint: n. de pessoas que assinam pela empresa.
+---
+# question: |
+#   Quantos representantes tem a ${ ordinal(i) } empresa outorgante?
+# subquestion: |
+#   Informe o n. de pessoas que assinam pela empresa outorgante.
+# fields:
+#   - N. de representantes: representante.target_number
+#     datatype: integer
+#     show if: 
+#       variable: outorgantes[i].tipo_pessoa
+#       is: Pessoa Jurídica
+#     hint: n. de pessoas que assinam pela empresa.
+# ---
+question: |
+  Dados Outorgante Pessoa Física
+fields:
+  - Nome: outorgantes[i].name.text
+    show if: 
+      variable: outorgantes[i].tipo_pessoa
+      is: Pessoa Física
+  - Sexo: outorgantes[i].sexo
+    choices:
+      - Feminino: Feminino
+      - Masculino: Masculino
+    datatype: radio
+    show if: 
+      variable: outorgantes[i].tipo_pessoa
+      is: Pessoa Física
+  - Tipo de logradouro: outorgantes[i].tipologradouro
+    choices:
+      - avenida: avenida
+      - rua: rua
+      - aeroporto: aeroporto
+      - alameda: alameda
+      - área: área
+      - campo: campo
+      - chácara: chácara
+      - colônia: colônia
+      - condomínio: condomínio
+      - conjunto: conjunto
+      - distrito: distrito
+      - esplanada: esplanada
+      - estação: estação
+      - estrada: estrada
+      - favela: favela
+      - fazenda: fazenda
+      - feira: feira
+      - jardim: jardim
+      - ladeira: ladeira
+      - lago: lago
+      - lagoa: lagoa
+      - largo: largo
+      - loteamento: loteamento
+      - morro: morro
+      - núcleo: núcleo
+      - parque: parque
+      - passarela: passarela
+      - pátio: pátio
+      - praça: praça
+      - quadra: quadra
+      - recanto: recanto
+      - residencial: residencial
+      - rodovia: rodovia
+      - setor: setor
+      - sítio: sítio
+      - travessa: travessa
+      - trecho: trecho
+      - trevo: trevo
+      - vale: vale
+      - vereda: vereda
+      - via: via
+      - viaduto: viaduto
+      - viela: viela
+      - vila: vila
+    datatype: combobox
+    show if: 
+      variable: outorgantes[i].tipo_pessoa
+      is: Pessoa Física
+    hint: rua, avenida
+  - Logradouro: outorgantes[i].logradouro
+    datatype: text
+    show if: 
+      variable: outorgantes[i].tipo_pessoa
+      is: Pessoa Física
+  - Número: outorgantes[i].numero
+    show if: 
+      variable: outorgantes[i].tipo_pessoa
+      is: Pessoa Física
+    datatype: text
+  - Complemento: outorgantes[i].complemento
+    show if: 
+      variable: outorgantes[i].tipo_pessoa
+      is: Pessoa Física
+    hint: apto. 201, sl. 2109, 17 andar, etc.
+    required: false
+    datatype: text
+  - Bairro: outorgantes[i].bairro
+    show if: 
+      variable: outorgantes[i].tipo_pessoa
+      is: Pessoa Física
+    datatype: text
+  - Município: outorgantes[i].municipio
+    show if: 
+      variable: outorgantes[i].tipo_pessoa
+      is: Pessoa Física
+    datatype: text
+    required: true
+    help: insira o município de residência do outorgante.
+  - Estado: outorgantes[i].estado
+    show if: 
+      variable: outorgantes[i].tipo_pessoa
+      is: Pessoa Física
+    choices:
+      - AC: AC
+      - AL: AL
+      - AP: AP
+      - AM: AM
+      - BA: BA
+      - CE: CE
+      - DF: DF
+      - ES: ES
+      - GO: GO
+      - MA: MA
+      - MT: MT
+      - MS: MS
+      - MG: MG
+      - PA: PA
+      - PB: PB
+      - PR: PR
+      - PE: PE
+      - PI: PI
+      - RJ: RJ
+      - RN: RN
+      - RS: RS
+      - RO: RO
+      - RR: RR
+      - SC: SC
+      - SP: SP
+      - SE: SE
+      - TO: TO
+    datatype: combobox
+    required: true
+    hint: selecione um
+    help: informe o estado de residência do outorgante
+  - Qual a nacionalidade do outorgante?: outorgantes[i].nacionalidade
+    show if: 
+      variable: outorgantes[i].tipo_pessoa
+      is: Pessoa Física
+    choices:
+      - brasileiro(a): brasileiro(a)
+      - estrangeiro(a): estrangeiro(a)
+    default: brasileiro(a)
+    datatype: radio
+    required: true
+  - Qual o estado civil do outorgante?: outorgantes[i].estadocivil
+    show if: 
+      variable: outorgantes[i].tipo_pessoa
+      is: Pessoa Física
+    choices:
+      - solteiro(a): solteiro(a)
+      - casado(a): casado(a)
+      - separado(a): separado(a)
+      - divorciado(a): divorciado(a)
+      - viúvo(a): viúvo(a)
+    datatype: radio
+    required: true
+    help: informe o estado civil do outorgante.
+  - Qual a profissão do outorgante?: outorgantes[i].profissao
+    show if: 
+      variable: outorgantes[i].tipo_pessoa
+      is: Pessoa Física
+    datatype: text
+    required: true
+    hint: advogado(a), engenheiro(a) civil, etc.
+  - CPF: outorgantes[i].cpf
+    show if: 
+      variable: outorgantes[i].tipo_pessoa
+      is: Pessoa Física
+    datatype: text
+    required: true
+    hint: 000.000.000-00
+  - Documento de identidade: outorgantes[i].documento
+    show if: 
+      variable: outorgantes[i].tipo_pessoa
+      is: Pessoa Física
+    datatype: text
+    hint: 00.000-000
+    required: true
+  - Órgão emissor: outorgantes[i].orgaoemissor
+    show if: 
+      variable: outorgantes[i].tipo_pessoa
+      is: Pessoa Física
+    datatype: text
+    required: true
+    help: insira o órgão em que o documento foi emitido. 
+    hint: SSP/MG
+progress: 20representante
